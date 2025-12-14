@@ -30,5 +30,4 @@ The program will run several tests:
 2. Basic Thread Pool execution.
 3. Stress testing with 10,000 tasks.
 
-## License
-[MIT](LICENSE)
+
