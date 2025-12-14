@@ -1,0 +1,10 @@
+# Build Artifacts
+*.exe
+*.o
+*.obj
+build/
+bin/
+
+# OS Files
+.DS_Store
+Thumbs.db
