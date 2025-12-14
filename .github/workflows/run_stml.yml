@@ -1,0 +1,33 @@
+name: Run STML
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      thread_count:
+        description: 'Number of threads for pool'
+        required: true
+        default: '4'
+
+jobs:
+  run-code:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Compile C++ Code
+      run: |
+        g++ -o stml main.cpp -std=c++17 -pthread
+        echo "Compilation successful."
+
+    - name: Run Application
+      run: |
+        # Determine thread count (default to 4 if triggered by push)
+        THREADS="${{ github.event.inputs.thread_count }}"
+        if [ -z "$THREADS" ]; then THREADS=4; fi
+        
+        echo "Running with $THREADS threads..."
+        echo "$THREADS" | ./stml
